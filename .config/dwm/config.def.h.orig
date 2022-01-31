@@ -83,7 +83,7 @@ static const Layout layouts[] = {
 /* dmenu */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 /* If you are using the standard dmenu program, use the following. */
-static const char *dmenucmd[]    = { "rofi", "-show", "run", NULL };
+static const char *dmenucmd[]    = { "dmenu_run", "-p", "Run: ", NULL };
 /* If you are using the dmenu-distrotube-git program, use the following for a cooler dmenu! */
 /* static const char *dmenucmd[]    = { "dmenu_run", "-g", "10", "-l", "48", "-p", "Run: ", NULL }; */
 
@@ -91,20 +91,18 @@ static const char *dmenucmd[]    = { "rofi", "-show", "run", NULL };
 static const char *termcmd[]     = { "alacritty", NULL };
 /* An alternative way to launch st along with the fish shell */
 /* static const char *termcmd[]     = { "st", "-e fish", NULL }; */
-static const char *tabtermcmd[]  = { "rofi", "-show", "ssh", NULL };
-static const char *screenshotkey[] = { "flameshot", "gui", NULL };
+static const char *tabtermcmd[]  = { "tabbed", "-r", "2", "st", "-w", "''", NULL };
 
 static Key keys[] = {
 	/* modifier             chain key  key        function        argument */
-	{ MODKEY,               -1,        XK_Print,  spawn,          {.v = screenshotkey } },
-	{ MODKEY,               -1,        XK_p, spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,     -1,        XK_Return, spawn,          {.v = dmenucmd } },
 	{ MODKEY,               -1,        XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,               -1,        XK_s,      spawn,          {.v = tabtermcmd } },
+	{ Mod1Mask,             -1,        XK_Return, spawn,          {.v = tabtermcmd } },
 	{ MODKEY,               -1,        XK_b,      togglebar,      {0} },
-	{ MODKEY|ControlMask,   -1,        XK_Left,   rotatestack,    {.i = +1 } },
-	{ MODKEY|ControlMask,   -1,        XK_Right,  rotatestack,    {.i = -1 } },
-	{ MODKEY|Mod1Mask,      -1,        XK_Left,   focusstack,     {.i = +1 } },
-	{ MODKEY|Mod1Mask,      -1,        XK_Right,  focusstack,     {.i = -1 } },
+	{ MODKEY|ShiftMask,     -1,        XK_j,      rotatestack,    {.i = +1 } },
+	{ MODKEY|ShiftMask,     -1,        XK_k,      rotatestack,    {.i = -1 } },
+	{ MODKEY,               -1,        XK_j,      focusstack,     {.i = +1 } },
+	{ MODKEY,               -1,        XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,               -1,        XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,               -1,        XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,               -1,        XK_h,      setmfact,       {.f = -0.05} },
@@ -141,6 +139,14 @@ static Key keys[] = {
 	{ MODKEY|Mod1Mask,      -1,        XK_f,      spawn,          CMD("pcmanfm") },
 	
     /* Dmenu scripts launched with emacs-style keychords SUPER + p followed by "key" */
+	{ MODKEY,               XK_p,      XK_e,      spawn,          CMD("./dmscripts/dm-confedit") },
+	{ MODKEY,               XK_p,      XK_i,      spawn,          CMD("./dmscripts/dm-maim") },
+	{ MODKEY,               XK_p,      XK_k,      spawn,          CMD("./dmscripts/dm-kill") },
+	{ MODKEY,               XK_p,      XK_l,      spawn,          CMD("./dmscripts/dm-logout") },
+	{ MODKEY,               XK_p,      XK_m,      spawn,          CMD("./dmscripts/dm-man") },
+	{ MODKEY,               XK_p,      XK_r,      spawn,          CMD("./dmscripts/dm-reddit") },
+	{ MODKEY,               XK_p,      XK_s,      spawn,          CMD("./dmscripts/dm-websearch") },
+	{ MODKEY,               XK_p,      XK_p,      spawn,          CMD("passmenu") },
     
     /* Doom emacs keybindings use the keychord CTRL + e followed by "key" */
 	{ ControlMask,          XK_e,      XK_e,      spawn,          CMD("emacsclient -c -a 'emacs'") },
