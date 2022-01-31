@@ -6,3 +6,6 @@
 * Terminal : Alacritty
 * Widget : Conky
 * Menu : Rofi
+
+
+** i used dwm & dwmblocks by distrotube, ithey were already patched :) **
