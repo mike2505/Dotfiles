@@ -7,5 +7,5 @@
 * Widget : Conky
 * Menu : Rofi
 
-
-** i used dwm & dwmblocks by distrotube, ithey were already patched :) **
+__I used dwm & dwmblocks by Distrotube, hey were already patched :)__
+__Check it : https://gitlab.com/dwt1/dwm-distrotube__
